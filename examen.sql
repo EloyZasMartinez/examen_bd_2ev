@@ -26,21 +26,27 @@ WHERE(SELECT id FROM lugares WHERE nombre = "Taberna 7ºCielo"));
 
 -- 2.- ID, y Nombre de las personas con personajes que tuvieran la habilidad 'Bola de Fuego'
 
-SELECT id, nombre FROM persona WHERE persona.id=
-	(SELECT id_persona FROM personaje WHERE id=
+SELECT id, nombre FROM persona WHERE persona.id IN 
+    (SELECT id_persona FROM personaje WHERE id IN 
         (SELECT id_personaje FROM mn_habilidad_personaje WHERE id_habilidad= 
-                (SELECT id FROM habilidades WHERE nombre='Bola de Fuego')));
+            (SELECT id FROM habilidades WHERE nombre='Bola de Fuego')));
 
---da problemas en SELECT id_persona FROM personaje WHERE id=
+-- id 16 nombre marcos 1fila
 
 
 -- 3.- ¿Que habilidades tienen los personajes casados?
 
+SELECT nombre FROM habilidades WHERE id IN 
+    (SELECT id_habilidad FROM mn_habilidad_personaje WHERE id_personaje IN 
+        (SELECT id_personaje FROM relacion WHERE id_tipo_relacion= 
+            (SELECT id FROM tipo_relacion WHERE nombre='casado')));
 
-
-
+--9 filas nombre bola de fuego
 
 -- 4.- ¿Que personaje tiene la fuerza más baja y quien lo interpreta?
+
+
+
 
 -- 5.- Capitulos con más de una anecdota relacionada
 

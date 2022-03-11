@@ -93,3 +93,7 @@ SELECT nombre FROM raza WHERE id IN
 --no me devuelve nada
 
 -- 15.- ¿Que raza de personaje es más bajo de media?
+SELECT nombre FROM raza WHERE id IN 
+    (SELECT id_raza FROM personaje WHERE id_fisicas IN 
+        (SELECT id FROM caracteristicas_fisicas WHERE altura= 
+            (SELECT MIN(altura)FROM caracteristicas_fisicas)));

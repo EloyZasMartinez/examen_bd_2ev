@@ -96,4 +96,4 @@ SELECT nombre FROM raza WHERE id IN
 SELECT nombre FROM raza WHERE id IN 
     (SELECT id_raza FROM personaje WHERE id_fisicas IN 
         (SELECT id FROM caracteristicas_fisicas WHERE altura= 
-            (SELECT MIN(altura)FROM caracteristicas_fisicas)));
+            (SELECT MIN(AVG(altura))FROM caracteristicas_fisicas)));

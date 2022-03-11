@@ -86,6 +86,10 @@ SELECT nombre FROM personaje where id IN
 -- 13.- Lugares más repetidos en las anecdotas
 
 -- 14.- ¿Que raza tiene la constitución más baja?
-
+SELECT nombre FROM raza WHERE id IN 
+    (SELECT id_raza FROM personaje WHERE id_rol IN 
+        (SELECT id FROM caracteristicas_rol WHERE constitucion= 
+            (SELECT MIN(constitucion)FROM caracteristicas_rol)));
+--no me devuelve nada
 
 -- 15.- ¿Que raza de personaje es más bajo de media?

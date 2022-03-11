@@ -49,6 +49,10 @@ SELECT nombre FROM habilidades WHERE id IN
 
 
 -- 5.- Capitulos con más de una anecdota relacionada
+SELECT titulo FROM capitulos WHERE id IN 
+    (SELECT id_capitulo FROM mn_anecdota_capitulo WHERE 1<
+        (SELECT COUNT(id_anecdota) FROM mn_anecdota_capitulo));
+-- no devuelve datos
 
 -- 6.- Todas las relaciones de los personajes del capitulo 1
 
@@ -59,17 +63,29 @@ SELECT nombre FROM habilidades WHERE id IN
 -- 9.- ¿Cual es la raza habitual de 'Pablo Rodriguez'?
 
 -- 10.- Habilidades que no estuvieran en ninguna anecdota
+SELECT habilidades.id FROM habilidades 
+    JOIN mn_habilidad_personaje ON mn_habilidad_personaje.id_habilidad = habilidades.id 
+    JOIN personaje ON personaje.id = mn_habilidad_personaje.id_personaje    
+    JOIN mn_personaje_anectdota ON mn_personaje_anectdota.id_personaje = personaje.id;
+--no me devuelve nada
 
 -- 11.- ¿Cuantos personajes hubo en cada anecdota?
+
 
 SELECT COUNT(id_persona) FROM anecdotas GROUP BY(titulo);
 --14 filas 171 personajes en la primera anecdota
 
 
 -- 12.- Listado de Personajes de cada capitulo
+SELECT nombre FROM personaje where id IN
+	(SELECT id_personaje FROM mn_personaje_capitulo WHERE id_capitulo IN 
+     	(SELECT id FROM capitulos GROUP BY(id)));
+
+--20 LINEAD CHORVITTA
 
 -- 13.- Lugares más repetidos en las anecdotas
 
 -- 14.- ¿Que raza tiene la constitución más baja?
+
 
 -- 15.- ¿Que raza de personaje es más bajo de media?

@@ -62,6 +62,10 @@ SELECT nombre FROM habilidades WHERE id IN
 
 -- 11.- ¿Cuantos personajes hubo en cada anecdota?
 
+SELECT COUNT(id_persona) FROM anecdotas GROUP BY(titulo);
+--14 filas 171 personajes en la primera anecdota
+
+
 -- 12.- Listado de Personajes de cada capitulo
 
 -- 13.- Lugares más repetidos en las anecdotas
